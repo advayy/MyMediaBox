@@ -208,7 +208,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   region: 'CA',
 };
 
-export const APP_VERSION = '1.0.0';
+export const APP_VERSION = '1.0.1';
 
 export function mediaKey(item: Pick<MediaItem, 'provider' | 'providerId' | 'mediaType'>): string {
   return `${item.provider}:${item.mediaType}:${item.providerId}`;

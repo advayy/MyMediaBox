@@ -1,6 +1,6 @@
 [package]
 name = "mymediabox"
-version = "1.0.0"
+version = "1.0.1"
 description = "MyMediaBox — a local-first TV and movie tracker"
 authors = ["MyMediaBox contributors"]
 edition = "2021"
