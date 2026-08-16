@@ -1,0 +1,27 @@
+/* Example custom skin overlay. Import this from Settings → Appearance. */
+
+:root {
+  --my-accent: #b8a7e3;
+}
+
+/* Custom skin CSS loads after the selected built-in skin. Match the skin
+   attribute when you want to override scoped built-in rules. */
+[data-skin='retro98'] .page,
+[data-skin='modern'] .page {
+  background: #a8a8a8;
+}
+
+[data-skin='retro98'] .nav-pill.active,
+[data-skin='modern'] .nav-pill.active {
+  background: var(--my-accent);
+}
+
+[data-skin='retro98'] .card-watched.watched,
+[data-skin='retro98'] .card-up-to-date.caught-up,
+[data-skin='retro98'] .tiny-caught-up.caught-up,
+[data-skin='modern'] .card-watched.watched,
+[data-skin='modern'] .card-up-to-date.caught-up,
+[data-skin='modern'] .tiny-caught-up.caught-up {
+  background: #59cc7b;
+  color: #111;
+}

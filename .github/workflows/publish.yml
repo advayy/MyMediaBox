@@ -1,0 +1,136 @@
+name: publish stable release
+
+on:
+  push:
+    branches:
+      - stable
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: release preflight
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Verify version files
+        run: npm run version:check
+
+      - name: Read release version
+        id: version
+        shell: bash
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Prevent reusing a version for different code
+        shell: bash
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="v${VERSION}"
+          git fetch --tags --force
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            TAG_SHA="$(git rev-list -n 1 "$TAG")"
+            if [ "$TAG_SHA" != "$GITHUB_SHA" ]; then
+              echo "::error::${TAG} already points to ${TAG_SHA}. Bump the app version before merging new code into stable."
+              exit 1
+            fi
+            echo "${TAG} already points to this commit; allowing a workflow rerun."
+          fi
+
+  publish-tauri:
+    name: ${{ matrix.label }}
+    needs: preflight
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: macOS Apple Silicon
+            platform: macos-latest
+            args: --target aarch64-apple-darwin
+          - label: macOS Intel
+            platform: macos-latest
+            args: --target x86_64-apple-darwin
+          - label: Linux x64
+            platform: ubuntu-22.04
+            args: ""
+          - label: Windows x64
+            platform: windows-latest
+            args: ""
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf xdg-utils
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: ./src-tauri -> target
+
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Build and publish MyMediaBox
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: v__VERSION__
+          releaseName: MyMediaBox v__VERSION__
+          releaseBody: |
+            Download the MyMediaBox build for your operating system below.
+
+            MyMediaBox stores watch history locally. Normal app updates replace the application files without deleting the local watch database.
+
+            This release is currently unsigned. macOS and Windows may show an operating-system security warning until code signing is configured.
+          releaseDraft: true
+          prerelease: false
+          generateReleaseNotes: true
+          releaseAssetNamePattern: '[name]_[version]_[platform]_[arch][ext]'
+          args: ${{ matrix.args }}
+
+  publish-release:
+    name: publish GitHub Release
+    needs: [preflight, publish-tauri]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Publish completed release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: gh release edit "v${VERSION}" --draft=false --repo "$GITHUB_REPOSITORY"

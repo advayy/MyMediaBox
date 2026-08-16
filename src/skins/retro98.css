@@ -1,0 +1,683 @@
+/*
+ * Retro 98 skin
+ * 98.css supplies the Win98 control primitives. These scoped rules adapt the
+ * existing media layout around them without changing the app's data or UX.
+ */
+
+[data-skin='retro98'] {
+  --retro-surface: var(--imtt-retro-surface, #c0c0c0);
+  --retro-surface-light: color-mix(in srgb, var(--retro-surface) 72%, white);
+  --retro-surface-dark: color-mix(in srgb, var(--retro-surface) 58%, black);
+  --retro-ink: #111;
+  --retro-muted: #565656;
+  --retro-purple: var(--imtt-retro-accent, #aa96d9);
+  --retro-purple-dark: color-mix(in srgb, var(--retro-purple) 68%, #2d2149);
+  --retro-purple-soft: color-mix(in srgb, var(--retro-purple) 48%, white);
+  --retro-green: color-mix(in srgb, var(--imtt-completion, #00c853) 72%, #063f21);
+  --retro-green-light: var(--imtt-completion, #00c853);
+  --retro-red: #a64545;
+  color-scheme: light;
+  font-family: "Pixelated MS Sans Serif", "MS Sans Serif", Tahoma, sans-serif;
+  background: var(--imtt-retro-desktop, #9d9d9d);
+  color: var(--retro-ink);
+}
+
+[data-skin='retro98'] body,
+[data-skin='retro98'] #root,
+[data-skin='retro98'] .app-shell,
+[data-skin='retro98'] .page,
+[data-skin='retro98'] .discover-page,
+[data-skin='retro98'] .detail-page,
+[data-skin='retro98'] .settings-page {
+  background: var(--imtt-retro-desktop, #9d9d9d);
+  color: var(--retro-ink);
+}
+
+[data-skin='retro98'] body {
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+[data-skin='retro98'] .topbar {
+  height: 60px;
+  background: var(--retro-surface);
+  color: var(--retro-ink);
+  border: 0;
+  border-bottom: 2px solid #101010;
+  box-shadow:
+    inset 1px 1px #fff,
+    inset -1px -1px #808080,
+    0 2px 0 #dfdfdf;
+  padding: 7px 10px;
+  gap: 9px;
+}
+
+[data-skin='retro98'] .nav-pills { gap: 5px; }
+[data-skin='retro98'] .nav-pill,
+[data-skin='retro98'] .settings-button {
+  min-height: 32px;
+  border-radius: 0;
+  color: #111;
+  background: var(--retro-surface);
+  text-shadow: none;
+  transform: none;
+}
+[data-skin='retro98'] .nav-pill:hover,
+[data-skin='retro98'] .settings-button:hover { background: #d1d1d1; transform: none; }
+[data-skin='retro98'] .nav-pill.active,
+[data-skin='retro98'] .settings-button.active {
+  background: var(--retro-purple);
+  color: #160f25;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+}
+[data-skin='retro98'] .nav-icon { color: #2d2441; }
+
+[data-skin='retro98'] .topbar-search .search-wrap > input,
+[data-skin='retro98'] .search-wrap > input {
+  min-height: 32px;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #808080, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+}
+[data-skin='retro98'] .search-icon { color: #574d69; top: 6px; }
+[data-skin='retro98'] .search-results {
+  border-radius: 0;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  background: var(--retro-surface);
+  box-shadow: 2px 2px 0 #000;
+}
+[data-skin='retro98'] .search-result { border-bottom: 1px solid #868686; }
+[data-skin='retro98'] .search-title,
+[data-skin='retro98'] .search-title span { color: #111; }
+[data-skin='retro98'] .search-title small,
+[data-skin='retro98'] .search-empty { color: #555; }
+[data-skin='retro98'] .search-all { background: var(--retro-purple-soft); color: #22173c; border-top: 1px solid #808080; }
+
+[data-skin='retro98'] .page { padding-top: 28px; }
+[data-skin='retro98'] h1,
+[data-skin='retro98'] h2,
+[data-skin='retro98'] h3 { color: #111; letter-spacing: 0; }
+[data-skin='retro98'] h1 { font-size: 26px; }
+[data-skin='retro98'] .eyebrow { color: #4b405b; letter-spacing: .08em; }
+[data-skin='retro98'] .page-heading-row {
+  padding: 10px 12px;
+  background: var(--retro-surface);
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #808080;
+}
+[data-skin='retro98'] .status-chip,
+[data-skin='retro98'] .metadata-status {
+  border-radius: 0;
+  border: 1px solid #808080;
+  background: #dfdfdf;
+  color: #111;
+  box-shadow: inset 1px 1px #fff;
+}
+[data-skin='retro98'] .metadata-status span { color: #5c5368; }
+[data-skin='retro98'] .metadata-status strong { color: #251a3b; }
+
+[data-skin='retro98'] .discover-switch {
+  border-radius: 0;
+  background: var(--retro-surface);
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  padding: 4px;
+}
+[data-skin='retro98'] .discover-switch button { border-radius: 0; color: #111; background: var(--retro-surface); }
+[data-skin='retro98'] .discover-switch button.active,
+[data-skin='retro98'] .genre-chips button.active,
+[data-skin='retro98'] .filter-choice-row button.active {
+  background: var(--retro-purple);
+  color: #160f25;
+}
+
+[data-skin='retro98'] .filter-panel,
+[data-skin='retro98'] .watched-filter-panel,
+[data-skin='retro98'] .settings-card,
+[data-skin='retro98'] .watch-history-stats-panel,
+[data-skin='retro98'] .stats-card,
+[data-skin='retro98'] .taste-card,
+[data-skin='retro98'] .detail-streaming-column,
+[data-skin='retro98'] .empty-state {
+  border-radius: 0;
+  background: var(--retro-surface);
+  color: #111;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #808080;
+}
+[data-skin='retro98'] .setting-row,
+[data-skin='retro98'] .filter-summary { border-color: #808080; }
+[data-skin='retro98'] .setting-row small,
+[data-skin='retro98'] .stacked-setting small,
+[data-skin='retro98'] .note,
+[data-skin='retro98'] .credit-copy,
+[data-skin='retro98'] .data-status,
+[data-skin='retro98'] .filter-field,
+[data-skin='retro98'] .filter-note { color: var(--retro-muted); }
+[data-skin='retro98'] .data-status strong { color: #111; }
+[data-skin='retro98'] .setting-row input[type='checkbox'] { accent-color: var(--retro-purple-dark); }
+[data-skin='retro98'] .stacked-setting input,
+[data-skin='retro98'] .two-col-settings input,
+[data-skin='retro98'] .setting-row input[type='number'],
+[data-skin='retro98'] .filter-field select,
+[data-skin='retro98'] .filter-grid input,
+[data-skin='retro98'] .filter-grid select {
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+}
+
+[data-skin='retro98'] .discover-section,
+[data-skin='retro98'] .library-section { margin-bottom: 30px; }
+[data-skin='retro98'] .discover-section-heading {
+  min-height: 32px;
+  padding: 5px 7px 5px 9px;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, var(--retro-purple-dark), var(--retro-purple));
+  color: #fff;
+}
+[data-skin='retro98'] .discover-section-heading h2,
+[data-skin='retro98'] .discover-section-heading .eyebrow { color: #fff; }
+[data-skin='retro98'] .section-arrow { min-width: 32px; min-height: 24px; }
+
+[data-skin='retro98'] .media-rail {
+  gap: 12px;
+  padding: 8px 8px 13px;
+  background: #858585;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+}
+[data-skin='retro98'] .library-grid,
+[data-skin='retro98'] .media-grid { gap: 14px; }
+[data-skin='retro98'] .media-card {
+  padding: 3px;
+  background: var(--retro-surface);
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #808080;
+}
+[data-skin='retro98'] .poster-button {
+  border: 0;
+  box-shadow: none;
+  min-width: 0;
+  min-height: 0;
+  background: #222;
+}
+[data-skin='retro98'] .poster-placeholder { background: #555; color: #eee; }
+[data-skin='retro98'] .progress-track { left: 3px; right: 3px; bottom: 3px; background: #535353; height: 6px; }
+[data-skin='retro98'] .progress-fill { background: var(--retro-purple-dark); }
+
+/* Keep the fast catalogue actions circular even in the Win98 skin. */
+[data-skin='retro98'] .card-add,
+[data-skin='retro98'] .card-watched,
+[data-skin='retro98'] .card-up-to-date,
+[data-skin='retro98'] .tiny-add,
+[data-skin='retro98'] .tiny-caught-up,
+[data-skin='retro98'] .card-favorite,
+[data-skin='retro98'] .card-rating {
+  box-shadow: 1px 1px 0 #000, inset 1px 1px rgba(255,255,255,.7);
+}
+[data-skin='retro98'] .card-add,
+[data-skin='retro98'] .tiny-add {
+  border-color: var(--retro-purple-dark);
+  background: var(--retro-surface);
+  color: #38275d;
+}
+[data-skin='retro98'] .card-add.tracked,
+[data-skin='retro98'] .tiny-add.tracked { background: var(--retro-purple); color: #111; }
+[data-skin='retro98'] .card-watched,
+[data-skin='retro98'] .card-up-to-date,
+[data-skin='retro98'] .tiny-caught-up {
+  border-color: #54456e;
+  background: #dedede;
+  color: #111;
+}
+[data-skin='retro98'] .card-watched.watched,
+[data-skin='retro98'] .card-up-to-date.caught-up,
+[data-skin='retro98'] .tiny-caught-up.caught-up {
+  border-color: #1f6f3b;
+  background: var(--retro-green-light);
+  color: #08180d;
+}
+[data-skin='retro98'] .card-up-to-date.updating,
+[data-skin='retro98'] .tiny-caught-up.updating { background: var(--retro-purple); color: #111; }
+[data-skin='retro98'] .card-remove { background: #d6d6d6; color: #111; border-radius: 0; }
+[data-skin='retro98'] .card-favorite { background: #d8d8d8; color: #3d3154; }
+[data-skin='retro98'] .card-favorite.favorite { background: var(--retro-purple-soft); color: #552c63; }
+[data-skin='retro98'] .card-rating { background: #d8d8d8; color: #4d3c13; }
+[data-skin='retro98'] .card-status-badge,
+[data-skin='retro98'] .completion-dot.completed {
+  border-radius: 0;
+  background: var(--retro-purple);
+  color: #151020;
+  border-color: var(--retro-purple-dark);
+}
+[data-skin='retro98'] .completion-dot.up-to-date { background: #a8d6b4; color: #173821; }
+
+[data-skin='retro98'] .detail-hero {
+  padding: 12px;
+  background: var(--retro-surface);
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+}
+[data-skin='retro98'] .detail-poster { border: 2px solid; border-color: #808080 #fff #fff #808080; }
+[data-skin='retro98'] .detail-copy h1,
+[data-skin='retro98'] .genre-line,
+[data-skin='retro98'] .overview { color: #111; }
+[data-skin='retro98'] .overview { line-height: 1.45; }
+[data-skin='retro98'] .season {
+  background: var(--retro-surface);
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+}
+[data-skin='retro98'] .season-header,
+[data-skin='retro98'] .episode-list,
+[data-skin='retro98'] .episode-row-wrap { border-color: #808080; }
+[data-skin='retro98'] .season-toggle,
+[data-skin='retro98'] .episode-row { color: #111; background: transparent; }
+[data-skin='retro98'] .episode-row:hover { background: var(--retro-purple-soft); }
+[data-skin='retro98'] .episode-number,
+[data-skin='retro98'] .episode-date,
+[data-skin='retro98'] .season-toggle small { color: #575757; }
+[data-skin='retro98'] .check-hit-target { background: transparent; box-shadow: none; min-width: 44px; }
+[data-skin='retro98'] .check-hit-target .check-box {
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+}
+[data-skin='retro98'] .check-hit-target.checked .check-box { background: var(--retro-green-light); border-color: #1f6f3b; }
+[data-skin='retro98'] .check-hit-target.partial .check-box { background: var(--retro-purple-soft); color: #111; border-color: var(--retro-purple-dark); }
+[data-skin='retro98'] .episode-bulk-choice { background: #d1d1d1; color: #111; border-color: #808080; }
+
+[data-skin='retro98'] .rating-dialog-backdrop { background: rgba(0,0,0,.48); }
+[data-skin='retro98'] .rating-dialog {
+  border-radius: 0;
+  background: var(--retro-surface);
+  color: #111;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+}
+
+[data-skin='retro98'] .demo-banner,
+[data-skin='retro98'] .error-banner,
+[data-skin='retro98'] .data-message {
+  border-radius: 0;
+  background: var(--retro-purple-soft);
+  border-color: var(--retro-purple-dark);
+  color: #181020;
+}
+
+[data-skin='retro98'] * { scrollbar-color: #808080 #c0c0c0; }
+[data-skin='retro98'] *::-webkit-scrollbar { width: 16px; height: 16px; background: #c0c0c0; }
+[data-skin='retro98'] *::-webkit-scrollbar-track { background: #c0c0c0; }
+[data-skin='retro98'] *::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 0;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+}
+
+/* 98.css expects checkbox + sibling-label markup. Settings use wrapping labels,
+   so keep those controls directly interactive while preserving the square look. */
+[data-skin='retro98'] .setting-row input[type='checkbox'] {
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+/* Card controls are deliberately compact status glyphs, not Win98 command buttons. */
+[data-skin='retro98'] .card-add,
+[data-skin='retro98'] .card-watched,
+[data-skin='retro98'] .card-up-to-date,
+[data-skin='retro98'] .card-remove,
+[data-skin='retro98'] .card-favorite,
+[data-skin='retro98'] .card-rating,
+[data-skin='retro98'] .tiny-add,
+[data-skin='retro98'] .tiny-caught-up,
+[data-skin='retro98'] .settings-button {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  text-shadow: none;
+}
+
+
+/* v0.1.18: finish the Retro 98 language instead of leaving modern dark cards behind. */
+[data-skin='retro98'] .upcoming-section,
+[data-skin='retro98'] .watch-history-stats-panel { max-width: 1180px; border-radius: 0; background: var(--retro-surface); color: #111; border: 2px solid; border-color: #fff #0a0a0a #0a0a0a #fff; box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #808080; }
+[data-skin='retro98'] .timeline-date { color: #2e2440; }
+[data-skin='retro98'] .timeline-day:not(:last-child)::before { background: var(--retro-purple-dark); }
+[data-skin='retro98'] .timeline-dot { border-radius: 0; background: var(--retro-purple); box-shadow: 1px 1px 0 #fff, -1px -1px 0 #555; }
+[data-skin='retro98'] .timeline-episode { border-radius: 0; border: 2px solid; border-color: #808080 #fff #fff #808080; background: var(--retro-surface-light); color: #111; box-shadow: none; }
+[data-skin='retro98'] .timeline-episode:hover { border-color: var(--retro-purple-dark); background: var(--retro-purple-soft); }
+[data-skin='retro98'] .timeline-episode > span { color: #4f4a54; }
+
+[data-skin='retro98'] .stat-card,
+[data-skin='retro98'] .watch-history-stats-grid > div { min-height: 78px; border-radius: 0; background: var(--retro-surface-light); color: #111; border: 2px solid; border-color: #808080 #fff #fff #808080; box-shadow: none; }
+[data-skin='retro98'] .stat-card strong,
+[data-skin='retro98'] .watch-history-stats-grid strong { color: #111; }
+[data-skin='retro98'] .stat-card span,
+[data-skin='retro98'] .watch-history-stats-grid span { color: #4b4b4b; }
+[data-skin='retro98'] .taste-card { border-radius: 0; background: var(--retro-surface); color: #111; }
+[data-skin='retro98'] .rank-label,
+[data-skin='retro98'] .rank-label strong,
+[data-skin='retro98'] .taste-card .muted { color: #111; }
+[data-skin='retro98'] .rank-track { height: 12px; border-radius: 0; border: 1px solid #111; background: var(--imtt-incomplete, #3f3f3f); }
+[data-skin='retro98'] .rank-track span { border-radius: 0; background: var(--imtt-completion, #00c853); }
+[data-skin='retro98'] .rank-track.favorite-rank span { background: var(--retro-purple); }
+
+[data-skin='retro98'] .watched-card-copy { gap: 3px; margin-top: 4px; padding: 5px 6px; background: var(--retro-surface-light); border: 2px solid; border-color: #808080 #fff #fff #808080; }
+[data-skin='retro98'] .watched-title { width: 100%; color: #111; font-size: 12px; font-weight: 700; text-decoration: none; }
+[data-skin='retro98'] .watched-date { color: #4f4f4f; }
+[data-skin='retro98'] .completion-dot { border-radius: 0; background: #dfdfdf; color: #222; border: 1px solid #777; }
+[data-skin='retro98'] .completion-dot.up-to-date { background: color-mix(in srgb, var(--imtt-completion, #00c853) 35%, white); color: #092d17; border-color: #087a34; }
+[data-skin='retro98'] .completion-dot.completed { background: var(--retro-purple); color: #181020; border-color: var(--retro-purple-dark); }
+[data-skin='retro98'] .completion-dot.did-not-finish { background: #ddd4e9; color: #3b2855; border-color: #725a93; }
+[data-skin='retro98'] .progress-track { height: 9px; background: var(--imtt-incomplete, #3f3f3f); border-top: 1px solid #111; }
+[data-skin='retro98'] .progress-fill { background: var(--imtt-completion, #00c853); }
+
+[data-skin='retro98'] .detail-page { max-width: none; }
+[data-skin='retro98'] .detail-hero { gap: 14px; }
+[data-skin='retro98'] .detail-hero.with-streaming { grid-template-columns: 190px minmax(360px, 1.25fr) minmax(300px, .9fr); align-items: stretch; }
+[data-skin='retro98'] .detail-copy { position: relative; z-index: 2; align-self: stretch; padding: 14px 16px; background: rgba(42, 42, 46, .92); color: #fff; border: 2px solid; border-color: #666 #fff #fff #444; }
+[data-skin='retro98'] .detail-copy h1,
+[data-skin='retro98'] .detail-copy .genre-line,
+[data-skin='retro98'] .detail-copy .overview { color: #fff; }
+[data-skin='retro98'] .detail-copy .eyebrow { color: #d7c7f2; }
+[data-skin='retro98'] .metadata-chips span { border-radius: 0; border: 1px solid #9b9b9b; background: #18181b; color: #fff; backdrop-filter: none; }
+[data-skin='retro98'] .detail-title-logo { filter: drop-shadow(1px 1px 0 #000); }
+[data-skin='retro98'] .detail-streaming-column { align-self: stretch; max-height: none; min-height: 100%; padding: 14px; border-radius: 0; background: var(--retro-surface-light); color: #111; border: 2px solid; border-color: #808080 #fff #fff #808080; backdrop-filter: none; }
+[data-skin='retro98'] .detail-streaming-column h2,
+[data-skin='retro98'] .detail-streaming-column .eyebrow,
+[data-skin='retro98'] .detail-streaming-column .provider-label,
+[data-skin='retro98'] .detail-streaming-column .justwatch-credit,
+[data-skin='retro98'] .detail-streaming-column .muted { color: #111; }
+[data-skin='retro98'] .detail-streaming-column .provider-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+[data-skin='retro98'] .detail-streaming-column .provider-pill { min-width: 0; border-radius: 0; border: 2px solid; border-color: #808080 #fff #fff #808080; background: #efefef; color: #111; }
+[data-skin='retro98'] .detail-streaming-column .provider-pill strong { color: #111; }
+[data-skin='retro98'] .detail-streaming-column .provider-pill img,
+[data-skin='retro98'] .detail-streaming-column .provider-pill > span { border-radius: 0; }
+[data-skin='retro98'] .provider-group { border-color: #888; }
+
+[data-skin='retro98'] .settings-tabs { gap: 3px; padding: 0 4px; border-bottom: 2px solid #fff; }
+[data-skin='retro98'] .settings-tabs button { border-radius: 0; border: 2px solid; border-color: #fff #0a0a0a #0a0a0a #fff; background: var(--retro-surface); color: #111; }
+[data-skin='retro98'] .settings-tabs button.active { background: var(--retro-purple); color: #111; box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a; }
+[data-skin='retro98'] .appearance-grid { border-color: #808080; }
+[data-skin='retro98'] .appearance-color-field small { color: #555; }
+[data-skin='retro98'] .color-hex-input { border-radius: 0; background: #fff; color: #111; }
+[data-skin='retro98'] .unsaved-tag { border-radius: 0; border-color: var(--retro-purple-dark); background: var(--retro-purple-soft); color: #111; }
+[data-skin='retro98'] .appearance-preview { border: 2px solid; border-color: #808080 #fff #fff #808080; }
+[data-skin='retro98'] .appearance-preview-title { background: var(--retro-purple); color: #111; }
+[data-skin='retro98'] .appearance-preview-button { border-radius: 0; }
+[data-skin='retro98'] .settings-save-row { background: var(--retro-surface); border: 2px solid; border-color: #fff #0a0a0a #0a0a0a #fff; }
+
+[data-skin='retro98'] .view-switch,
+[data-skin='retro98'] .filter-toggle,
+[data-skin='retro98'] .secondary-action,
+[data-skin='retro98'] .save-button,
+[data-skin='retro98'] .primary-action,
+[data-skin='retro98'] .favorite-action,
+[data-skin='retro98'] .rating-action,
+[data-skin='retro98'] .watch-action,
+[data-skin='retro98'] .stop-watching-action,
+[data-skin='retro98'] .load-more { border-radius: 0; }
+[data-skin='retro98'] .view-switch { background: var(--retro-surface); border: 2px solid; border-color: #fff #0a0a0a #0a0a0a #fff; }
+[data-skin='retro98'] .view-switch button { border-radius: 0; color: #111; }
+[data-skin='retro98'] .view-switch button.active { background: var(--retro-purple); color: #111; }
+
+@media (max-width: 1050px) {
+  [data-skin='retro98'] .detail-hero.with-streaming { grid-template-columns: 180px minmax(0, 1fr); }
+  [data-skin='retro98'] .detail-streaming-column { grid-column: 2; }
+}
+
+
+/* v0.1.19: color-coded sections and stricter 98-style component consistency. */
+[data-skin='retro98'] .nav-pill.nav-discover.active { background: var(--imtt-nav-discover, var(--retro-purple)); }
+[data-skin='retro98'] .nav-pill.nav-movies.active { background: var(--imtt-nav-movies, #d98282); }
+[data-skin='retro98'] .nav-pill.nav-shows.active { background: var(--imtt-nav-shows, #e3c85f); }
+[data-skin='retro98'] .nav-pill.nav-upcoming.active { background: var(--imtt-nav-upcoming, #81d8d0); }
+[data-skin='retro98'] .nav-pill.nav-watched.active { background: var(--imtt-nav-history, #e89a4f); }
+[data-skin='retro98'] .nav-pill.nav-stats.active { background: var(--imtt-nav-stats, #5578d1); color: #fff; }
+[data-skin='retro98'] .nav-pill.active .nav-icon { color: currentColor; }
+
+[data-skin='retro98'] .discover-switch button:first-child.active { background: var(--imtt-nav-shows, #e3c85f); color: #111; }
+[data-skin='retro98'] .discover-switch button:last-child.active { background: var(--imtt-nav-movies, #d98282); color: #111; }
+
+/* Old fixed greys now follow the chosen Retro palette. */
+[data-skin='retro98'] .media-rail {
+  background: color-mix(in srgb, var(--imtt-retro-desktop, #9d9d9d) 72%, #4f4f4f);
+}
+[data-skin='retro98'] .nav-pill:hover,
+[data-skin='retro98'] .settings-button:hover,
+[data-skin='retro98'] .episode-bulk-choice,
+[data-skin='retro98'] .card-remove,
+[data-skin='retro98'] .card-favorite,
+[data-skin='retro98'] .card-rating {
+  background: var(--retro-surface-light);
+}
+[data-skin='retro98'] * { scrollbar-color: var(--retro-surface-dark) var(--retro-surface); }
+[data-skin='retro98'] *::-webkit-scrollbar,
+[data-skin='retro98'] *::-webkit-scrollbar-track { background: var(--retro-surface); }
+[data-skin='retro98'] *::-webkit-scrollbar-thumb { background: var(--retro-surface); }
+
+/* Expanded episode descriptions are inset information fields rather than loose text. */
+[data-skin='retro98'] .episode-description-panel {
+  margin: 7px 44px 10px 202px;
+  padding: 9px 11px 10px;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  background: var(--retro-surface-light);
+  box-shadow: inset 1px 1px #9a9a9a;
+}
+[data-skin='retro98'] .episode-description-label {
+  margin-bottom: 5px;
+  color: #242424;
+  font-size: 11px;
+  font-weight: 800;
+}
+[data-skin='retro98'] .episode-description-panel p {
+  color: #333;
+  font-size: 11px;
+  line-height: 1.45;
+}
+[data-skin='retro98'] .episode-summary-button {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #111;
+  padding: 5px 7px;
+}
+[data-skin='retro98'] .episode-summary-button .episode-name { color: #222; font-weight: 700; }
+[data-skin='retro98'] .episode-summary-button small { color: #666; }
+[data-skin='retro98'] .episode-summary-button:hover { background: var(--retro-purple-soft); }
+[data-skin='retro98'] .episode-summary-button:hover .episode-name { color: #111; }
+
+/* Discover and Watch History filtering use proper raised/sunken Retro controls. */
+[data-skin='retro98'] .filter-toggle {
+  min-height: 30px;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  background: var(--retro-surface);
+  color: #111;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #808080;
+}
+[data-skin='retro98'] .filter-toggle span { color: #222; }
+[data-skin='retro98'] .filter-toggle:hover { background: var(--retro-surface-light); }
+[data-skin='retro98'] .filter-toggle.active {
+  background: var(--retro-purple);
+  color: #111;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a;
+}
+[data-skin='retro98'] .filter-panel,
+[data-skin='retro98'] .watched-filter-panel {
+  border-radius: 0;
+  background: var(--retro-surface);
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  box-shadow: 2px 2px 0 #000, inset 1px 1px #dfdfdf, inset -1px -1px #808080;
+}
+[data-skin='retro98'] .filter-grid label,
+[data-skin='retro98'] .genre-filter,
+[data-skin='retro98'] .filter-field { color: #333; }
+[data-skin='retro98'] .genre-chips button,
+[data-skin='retro98'] .filter-choice-row button,
+[data-skin='retro98'] .filter-summary button {
+  border-radius: 0;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  background: var(--retro-surface);
+  color: #111;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #808080;
+  min-height: 26px;
+}
+[data-skin='retro98'] .genre-chips button:active,
+[data-skin='retro98'] .filter-choice-row button:active,
+[data-skin='retro98'] .filter-summary button:active,
+[data-skin='retro98'] .genre-chips button.active,
+[data-skin='retro98'] .filter-choice-row button.active {
+  background: var(--retro-purple);
+  color: #111;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a;
+}
+[data-skin='retro98'] .filter-summary { color: #444; border-color: #808080; }
+[data-skin='retro98'] .panel-toggle { color: #111; }
+
+/* Status/action colors are independent skin variables. */
+[data-skin='retro98'] .completion-dot.up-to-date {
+  background: var(--imtt-tag-up-to-date, #a8d6b4);
+  color: #102618;
+  border-color: color-mix(in srgb, var(--imtt-tag-up-to-date, #a8d6b4) 65%, black);
+}
+[data-skin='retro98'] .completion-dot.completed {
+  background: var(--imtt-tag-completed, var(--retro-purple));
+  color: #111;
+  border-color: color-mix(in srgb, var(--imtt-tag-completed, var(--retro-purple)) 65%, black);
+}
+[data-skin='retro98'] .completion-dot.did-not-finish,
+[data-skin='retro98'] .card-status-badge {
+  background: var(--imtt-tag-dnf, #8f6bab);
+  color: #111;
+  border-color: color-mix(in srgb, var(--imtt-tag-dnf, #8f6bab) 65%, black);
+}
+[data-skin='retro98'] .card-rating { color: color-mix(in srgb, var(--imtt-rating, #d6b84f) 68%, #211900); }
+[data-skin='retro98'] .card-rating.rated {
+  background: color-mix(in srgb, var(--imtt-rating, #d6b84f) 42%, var(--retro-surface-light));
+  border-color: color-mix(in srgb, var(--imtt-rating, #d6b84f) 70%, black);
+  color: #111;
+}
+[data-skin='retro98'] .rating-action span,
+[data-skin='retro98'] .rating-value > span { color: var(--imtt-rating, #d6b84f); }
+[data-skin='retro98'] .rating-slider { accent-color: var(--imtt-rating, #d6b84f); }
+[data-skin='retro98'] .card-favorite.favorite {
+  background: color-mix(in srgb, var(--imtt-favorite, #d995b1) 48%, var(--retro-surface-light));
+  border-color: color-mix(in srgb, var(--imtt-favorite, #d995b1) 70%, black);
+  color: #50152d;
+}
+
+/* Appearance editor itself follows the new palette instead of leaking fixed greys. */
+[data-skin='retro98'] .appearance-group { border-color: var(--retro-surface-dark); }
+[data-skin='retro98'] .appearance-group-heading small { color: #555; }
+[data-skin='retro98'] .appearance-preview-tabs { background: var(--retro-surface); }
+[data-skin='retro98'] .appearance-preview-tabs span,
+[data-skin='retro98'] .appearance-preview-statuses span { border-radius: 0; }
+
+@media (max-width: 1050px) {
+  [data-skin='retro98'] .episode-description-panel { margin-left: 174px; margin-right: 30px; }
+}
+
+
+/* v0.1.19 follow-through: settings selects and detail action colors. */
+[data-skin='retro98'] .setting-row select {
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+}
+[data-skin='retro98'] .rating-action.rated {
+  border-color: color-mix(in srgb, var(--imtt-rating, #d6b84f) 70%, black);
+  background: color-mix(in srgb, var(--imtt-rating, #d6b84f) 40%, var(--retro-surface-light));
+  color: #111;
+}
+[data-skin='retro98'] .favorite-action.favorite {
+  border-color: color-mix(in srgb, var(--imtt-favorite, #d995b1) 70%, black);
+  background: color-mix(in srgb, var(--imtt-favorite, #d995b1) 42%, var(--retro-surface-light));
+  color: #351321;
+}
+
+
+/* v0.1.20: Retro 98 uses the active page color throughout the structural UI. */
+[data-skin='retro98'] .app-shell {
+  --retro-purple: var(--page-accent, var(--imtt-retro-accent, #aa96d9));
+  --retro-purple-dark: color-mix(in srgb, var(--retro-purple) 68%, #111);
+  --retro-purple-soft: color-mix(in srgb, var(--retro-purple) 42%, var(--retro-surface));
+}
+[data-skin='retro98'] .page-heading-row {
+  border-left: 7px solid var(--page-accent);
+}
+[data-skin='retro98'] .page-heading-row h1,
+[data-skin='retro98'] .page-heading-row .eyebrow,
+[data-skin='retro98'] .library-section-heading h2,
+[data-skin='retro98'] .section-title-row h2,
+[data-skin='retro98'] .library-section > h2 {
+  color: var(--page-accent-dark);
+}
+[data-skin='retro98'] .progress-fill { background: var(--imtt-completion, #00c853); }
+[data-skin='retro98'] .media-rail { background: var(--retro-surface-dark); }
+[data-skin='retro98'] .search-icon { color: var(--page-accent-dark); }
+[data-skin='retro98'] .search-all { background: var(--retro-purple-soft); color: #111; }
+[data-skin='retro98'] .metadata-status span,
+[data-skin='retro98'] .metadata-status strong { color: var(--page-accent-dark); }
+[data-skin='retro98'] .settings-button.active { background: var(--imtt-retro-accent, #aa96d9); }
+
+/* Stats media charts retain their content colors even though Stats itself is blue. */
+[data-skin='retro98'] .rank-track.tv-rank span { background: var(--imtt-nav-shows, #e3c85f); }
+[data-skin='retro98'] .rank-track.movie-rank span { background: var(--imtt-nav-movies, #d98282); }
+[data-skin='retro98'] .rank-track.rating-rank span { background: var(--imtt-nav-stats, #5578d1); }
+[data-skin='retro98'] .tv-taste-card { border-top-color: var(--imtt-nav-shows, #e3c85f); }
+[data-skin='retro98'] .movie-taste-card { border-top-color: var(--imtt-nav-movies, #d98282); }
+[data-skin='retro98'] .liked-taste-card { border-top-color: var(--imtt-nav-stats, #5578d1); }
+
+/* The preview uses the same 98.css visual grammar as the live app. */
+[data-skin='retro98'] .appearance-preview-tabs button {
+  border-radius: 0;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  background: var(--retro-surface);
+  color: #111;
+}
+[data-skin='retro98'] .appearance-preview-tabs button.active {
+  background: var(--preview-tab-accent);
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a;
+}
+[data-skin='retro98'] .appearance-preview-heading {
+  background: var(--retro-surface-light);
+  border-top: 2px solid #808080;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+[data-skin='retro98'] .appearance-preview-heading strong { color: color-mix(in srgb, var(--preview-page-accent) 70%, #111); }
+[data-skin='retro98'] .appearance-preview-controls button {
+  border-radius: 0;
+  border: 2px solid;
+  border-color: #fff #0a0a0a #0a0a0a #fff;
+  background: var(--retro-surface);
+  color: #111;
+}
+[data-skin='retro98'] .appearance-preview-controls button.active {
+  background: var(--preview-page-accent);
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a;
+}
