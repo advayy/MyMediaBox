@@ -17,6 +17,7 @@ jobs:
       contents: read
     outputs:
       version: ${{ steps.version.outputs.version }}
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,7 +29,7 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Install frontend dependencies
-        run: npm install
+        run: npm ci
 
       - name: Verify version files
         run: npm run version:check
@@ -45,13 +46,17 @@ jobs:
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           TAG="v${VERSION}"
+
           git fetch --tags --force
+
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             TAG_SHA="$(git rev-list -n 1 "$TAG")"
+
             if [ "$TAG_SHA" != "$GITHUB_SHA" ]; then
               echo "::error::${TAG} already points to ${TAG_SHA}. Bump the app version before merging new code into stable."
               exit 1
             fi
+
             echo "${TAG} already points to this commit; allowing a workflow rerun."
           fi
 
@@ -60,24 +65,33 @@ jobs:
     needs: preflight
     permissions:
       contents: write
+
     strategy:
       fail-fast: false
       matrix:
         include:
           - label: macOS Apple Silicon
+            assetLabel: macOS_Apple-Silicon
             platform: macos-latest
             args: --target aarch64-apple-darwin
+
           - label: macOS Intel
+            assetLabel: macOS_Intel
             platform: macos-latest
             args: --target x86_64-apple-darwin
+
           - label: Linux x64
+            assetLabel: Linux_x64
             platform: ubuntu-22.04
             args: ""
+
           - label: Windows x64
+            assetLabel: Windows_x64
             platform: windows-latest
             args: ""
 
     runs-on: ${{ matrix.platform }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -85,7 +99,12 @@ jobs:
         if: matrix.platform == 'ubuntu-22.04'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf xdg-utils
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf \
+            xdg-utils
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -103,25 +122,41 @@ jobs:
           workspaces: ./src-tauri -> target
 
       - name: Install frontend dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build and publish MyMediaBox
         uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         with:
           tagName: v__VERSION__
           releaseName: MyMediaBox v__VERSION__
+
           releaseBody: |
-            Download the MyMediaBox build for your operating system below.
+            ## Downloads
 
-            MyMediaBox stores watch history locally. Normal app updates replace the application files without deleting the local watch database.
+            **macOS Apple Silicon** — M1, M2, M3, M4 and newer Apple Silicon Macs  
+            **macOS Intel** — older Intel-based Macs  
+            **Windows x64** — most modern Windows PCs  
+            **Linux x64** — most Intel/AMD Linux PCs
 
-            This release is currently unsigned. macOS and Windows may show an operating-system security warning until code signing is configured.
+            ### Which file should I download?
+
+            **macOS:** download the `.dmg` for your Mac type.  
+            **Windows:** download the `.exe` installer.  
+            **Linux:** `.AppImage` is the simplest portable option; `.deb` and `.rpm` are also provided.
+
+            MyMediaBox stores your watch history locally. Normal application updates replace the app itself without deleting your local watch database.
+
+            > **Early release note:** these builds are currently unsigned. macOS and Windows may display an operating-system security warning until code signing is configured.
+
           releaseDraft: true
           prerelease: false
           generateReleaseNotes: true
-          releaseAssetNamePattern: '[name]_[version]_[platform]_[arch][ext]'
+
+          releaseAssetNamePattern: '[name]_[version]_${{ matrix.assetLabel }}[ext]'
+
           args: ${{ matrix.args }}
 
   publish-release:
@@ -130,9 +165,13 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
+
     steps:
       - name: Publish completed release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ needs.preflight.outputs.version }}
-        run: gh release edit "v${VERSION}" --draft=false --repo "$GITHUB_REPOSITORY"
+        run: |
+          gh release edit "v${VERSION}" \
+            --draft=false \
+            --repo "$GITHUB_REPOSITORY"
