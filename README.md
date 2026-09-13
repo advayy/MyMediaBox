@@ -8,7 +8,7 @@ MyMediaBox is a local-first TV and movie tracker built around fast episode check
 
 The app uses TMDB for metadata such as titles, episodes, artwork, discovery, recommendations, release dates, certifications, and streaming availability. Your library, watch history, ratings, favorites, stopped-watching state, settings, and backups are local.
 
-> **Status:** 1.0 public release. The core tracker is usable now and development is continuing in public.
+> **Status:** 1.1 public release. The core tracker is usable now and development is continuing in public.
 
 ## Why I built it
 
@@ -144,4 +144,3 @@ MIT
 The source of truth for development is `main`. Code approved for a public release is merged into `stable`; GitHub Actions then builds MyMediaBox for macOS, Windows, and Linux and publishes the downloadable files under GitHub Releases. See [`RELEASING.md`](./RELEASING.md) for the maintainer workflow.
 
 The first public version is **1.0.0**. Current builds are unsigned, so macOS or Windows may show a security warning until signing/notarization is configured.
-

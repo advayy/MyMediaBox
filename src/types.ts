@@ -183,7 +183,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   includeSpecialsInProgress: false,
   promptForRatingAfterWatch: false,
   safeSearch: true,
-  skin: 'retro98',
+  skin: 'modern',
   pixelNavIcons: true,
   retroAccent: '#aa96d9',
   retroDesktop: '#9d9d9d',
