@@ -183,7 +183,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   includeSpecialsInProgress: false,
   promptForRatingAfterWatch: false,
   safeSearch: true,
-  skin: 'retro98',
+  skin: 'modern',
   pixelNavIcons: true,
   retroAccent: '#aa96d9',
   retroDesktop: '#9d9d9d',
@@ -208,7 +208,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   region: 'CA',
 };
 
-export const APP_VERSION = '1.0.1';
+export const APP_VERSION = '1.0.2';
 
 export function mediaKey(item: Pick<MediaItem, 'provider' | 'providerId' | 'mediaType'>): string {
   return `${item.provider}:${item.mediaType}:${item.providerId}`;
